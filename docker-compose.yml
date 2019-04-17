@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  essen:
+    build: ./essen
+    ports:
+      - '2883:1883'
+    depends_on:
+      - neuhausen
+
+  neuhausen:
+    image: eclipse-mosquitto
+    ports:
+      - '1883:1883'
