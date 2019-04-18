@@ -1,14 +1,22 @@
 version: '3'
 
 services:
-  essen:
-    build: ./essen
-    ports:
-      - '2883:1883'
-    depends_on:
-      - neuhausen
-
-  neuhausen:
-    image: eclipse-mosquitto
+  alpha:
+    build: ./alpha
     ports:
       - '1883:1883'
+
+  bravo:
+    build: ./bravo
+    ports:
+      - '2883:1883'
+      - '2884:1884'
+    depends_on:
+      - alpha
+
+  proxy:
+    build: ./proxy
+    ports:
+      - '80:80'
+    depends_on:
+      - bravo
